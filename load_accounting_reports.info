@@ -1,0 +1,9 @@
+name = Load Accounting Reports
+description = Reports for Load Accounting module
+core = "7.x"
+version = 7.x-0.1
+project = 4 Global
+package = 4 Global
+dependencies[] = load_accounting
+dependencies[] = views_summarize
+

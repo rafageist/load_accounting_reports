@@ -1,0 +1,65 @@
+<?php
+
+/**
+ * Implements hook_requirements().
+ *
+ * @param $phase
+ *
+ * @return array
+ */
+function load_accounting_reports_requirements($phase){
+	$requirements = [];
+
+	// Ensure translations don't break at install time.
+	$t = get_t();
+
+	// Report Drupal version.
+	if($phase == 'runtime'){
+		$path_mpdf = views_pdf_get_library('mpdf');
+
+		$requirements['load_accounting_reports_mpdf'] = [
+			'title' => $t('Load Accounting Reports - mPDF'),
+			'value' => $t('Not present'),
+			'description' => $t('The mPDF library is used for the Load Accounting Reports. Please download it and place it in this location: @location.', ['@location' => $path_mpdf]),
+			'severity' => REQUIREMENT_ERROR,
+		];
+
+		if(file_exists($path_mpdf)){
+			$requirements['load_accounting_reports_mpdf']['severity'] = REQUIREMENT_OK;
+			$requirements['load_accounting_reports_mpdf']['value'] = $t('Present');
+			unset($requirements['load_accounting_reports_mpdf']['description']);
+		}
+	}
+
+	return $requirements;
+}
+
+/**
+ * This function returns the path to a given library.
+ *
+ * @param $name string Name of the Library
+ *
+ * @return string
+ */
+function load_accounting_reports_get_library($name){
+	if(function_exists('libraries_get_path')){
+		return libraries_get_path($name);
+	}
+	else{
+		return 'sites/all/libraries/' . $name;
+	}
+}
+
+function load_accounting_reports_install(){
+	$path = './' . drupal_get_path('module', 'load_accounting_reports') . '/views/load_totals.inc';
+	$view = new view();
+	include $path;
+	$view->save();
+}
+
+function load_accounting_reports_uninstall(){
+	$path = './' . drupal_get_path('module', 'load_accounting_reports') . '/views/load_totals.inc';
+	$view = new view();
+	include $path;
+	$view->delete(true);
+}

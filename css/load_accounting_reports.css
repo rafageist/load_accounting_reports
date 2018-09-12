@@ -1,0 +1,26 @@
+.view-load-totals td {
+    padding: 5px;
+    border-bottom: 1px solid gray;
+}
+
+.view-load-totals th {
+    padding: 5px;
+    background: rgb(233, 49, 75);
+    color: white;
+}
+
+.view-load-totals th > a {
+    color: white;
+}
+
+.views-exposed-form label {
+    float: left;
+}
+
+.views-exposed-form div.views-submit-button {
+    float: right;
+}
+
+.views-exposed-form div.views-reset-button {
+    float: right;
+}

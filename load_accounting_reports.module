@@ -1,0 +1,133 @@
+<?php
+
+
+/**
+ * Implements hook_menu().
+ */
+function load_accounting_reports_menu(){
+	$items = [];
+	$items["loads/pdf"] = [
+		'title' => t('Loads Totals'),
+		'page callback' => 'load_accounting_reports_loads_totals_pdf',
+		'page arguments' => [],
+		'access callback' => 'user_access',
+		'access arguments' => ['access loads totals'],
+		'type' => MENU_NORMAL_ITEM
+	];
+
+	return $items;
+}
+
+
+/**
+ * Implements hook_views_api().
+ */
+function load_accounting_reports_views_api(){
+	return [
+		'api' => '3.0',
+	];
+}
+
+/**
+ * Implements hook_views_pre_render().
+ *
+ * @param $view
+ */
+function load_accounting_reports_views_pre_render(&$view){
+	if($view->name == 'load_totals'){
+		drupal_add_css(drupal_get_path('module', 'load_accounting_reports') . "/css/load_accounting_reports.css");
+		$view->pre_render_called = true;
+	}
+}
+
+/**
+ * Implements hook_views_default_views().
+ */
+function load_accounting_reports_views_default_views(){
+	$path = './' . drupal_get_path('module', 'load_accounting_reports') . '/views/*.inc';
+	$views = [];
+	foreach(glob($path) as $views_filename){
+		require_once($views_filename);
+	}
+
+	return $views;
+}
+
+/**
+ * Generate PDF for Loads Totals
+ *
+ * @throws MpdfException
+ */
+function load_accounting_reports_loads_totals_pdf(){
+	$path = './' . drupal_get_path('module', 'load_accounting_reports') . '/views/load_totals.inc';
+	$view = new view();
+
+	include $path;
+
+	$view->dom_id = uniqid();
+	$output = $view->render('pdf');
+
+	$p = strpos($output, '<table');
+	$p2 = strpos($output, '</table');
+	$output = substr($output, $p, $p2 - $p + 8);
+	$output = str_replace(['BOL', 'Rate Confirmation', 'bol.pdf', 'confirmation.pdf', 'Total:'], '', $output);
+	$output = str_replace('Average (excluding empty values):', '', $output);
+	$output = str_replace(['<a ', '</a>'], ['<span ', '</span>'], $output);
+
+
+	$head = '<html><head><title>4Globals - Reports - Loads</title>';
+	$head .= '<style>' . file_get_contents(drupal_get_path('module', 'load_accounting_reports') . '/css/loads_totals_pdf.css') . '</style>';
+	$head .= '</head><body>';
+
+	$header = '<img src="sites/all/themes/load_subtheme/login.png" width="100"><br/><h2 align="right">Loads</h2>';
+
+	$foot = '<p align="center" class="finger-print">4Global - Loads Report - ' . date("M/d/Y");
+
+	if(isset($_GET['field_date_time_value']['min']['date']) && ! empty($_GET['field_date_time_value']['min']['date'])){
+		$foot .= ' | From: <b>' . $_GET['field_date_time_value']['min']['date'] . '</b>';
+	}
+
+	if(isset($_GET['field_date_time_value']['max']['date']) && ! empty($_GET['field_date_time_value']['min']['date'])){
+		$foot .= ' | To: <b>' . $_GET['field_date_time_value']['min']['date'] . '</b>';
+	}
+
+	if(isset($_GET['field_dispatcher_target_id_entityreference_filter']) && $_GET['field_dispatcher_target_id_entityreference_filter'] != 'All'){
+		$dispatcher = user_load($_GET['field_dispatcher_target_id_entityreference_filter']);
+		$foot .= ' | Dispatcher: <b>' . $dispatcher->field_full_name['und'][0]['value'] . '</b>';
+	}
+
+	if(isset($_GET['uid_entityreference_filter']) && $_GET['uid_entityreference_filter'] != 'All'){
+		$author = user_load($_GET['uid_entityreference_filter']);
+		$foot .= ' | Author: <b>' . $author->field_full_name['und'][0]['value'] . '</b>';
+	}
+
+	if(isset($_GET['field_customer_target_id_entityreference_filter']) && $_GET['field_customer_target_id_entityreference_filter'] != 'All'){
+		$customer = node_load($_GET['field_customer_target_id_entityreference_filter']);
+		$foot .= ' | Customer: <b>' . $customer->title . '</b>';
+	}
+
+	if(isset($_GET['field_single_carrier_target_id_entityreference_filter']) && $_GET['field_single_carrier_target_id_entityreference_filter'] != 'All'){
+		$carrier = node_load($_GET['field_single_carrier_target_id_entityreference_filter']);
+		$foot .= ' | Carrier: <b>' . $carrier->title . '</b>';
+	}
+
+	if(isset($_GET['field_driver_target_id_entityreference_filter']) && $_GET['field_single_carrier_target_id_entityreference_filter'] != 'All'){
+		$driver = node_load($_GET['field_driver_target_id_entityreference_filter']);
+		$foot .= ' | Driver: <b>' . $driver->title . '</b>';
+	}
+
+	if(isset($_GET['field_truck_target_id_entityreference_filter']) && $_GET['field_truck_target_id_entityreference_filter'] != 'All'){
+		$truck = node_load($_GET['field_truck_target_id_entityreference_filter']);
+		$foot .= ' | Truck: <b>' . $truck->title . '</b>';
+	}
+
+	$foot .= '</p></body></html>';
+
+	$output = $head . $header . $output . $foot;
+
+	include "sites/all/libraries/mpdf/mpdf.php";
+
+	$pdf = new mPDF('', 'A4', 0, '', 15, 15, 16, 16, 9, 9, 'L');
+	$pdf->writeHTML($output);
+	$pdf->output("4Global-Loads-" . date("Y-m-d-h-i-s") . ".pdf", "D");
+}

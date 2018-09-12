@@ -1,0 +1,34 @@
+body {
+    font-size: 12px;
+}
+
+td.views-align-right {
+    text-align: right;
+    font-weight: bold;
+}
+
+td {
+    pading: 5px;
+    border-bottom: 1px solid black;
+}
+
+th {
+    padding: 5px;
+    background: rgb(233, 49, 75);
+    color: white;
+}
+
+h2 {
+    color: gray;
+    margin-top: -30px;
+}
+
+.finger-print {
+    font-size: 10px;
+    color: gray;
+}
+
+.summary td{
+    background: #eeeeee;
+    text-align: right;
+}
