@@ -17,6 +17,7 @@ $handler->display->display_options['css_class'] = 'load-totals';
 $handler->display->display_options['use_more_always'] = false;
 $handler->display->display_options['group_by'] = true;
 $handler->display->display_options['access']['type'] = 'perm';
+$handler->display->display_options['access']['perm'] = 'access loads totals report';
 $handler->display->display_options['cache']['type'] = 'none';
 $handler->display->display_options['query']['type'] = 'views_query';
 $handler->display->display_options['exposed_form']['type'] = 'basic';
@@ -513,13 +514,13 @@ $handler->display->display_options['filters']['field_date_time_value']['id'] = '
 $handler->display->display_options['filters']['field_date_time_value']['table'] = 'field_data_field_date_time';
 $handler->display->display_options['filters']['field_date_time_value']['field'] = 'field_date_time_value';
 $handler->display->display_options['filters']['field_date_time_value']['relationship'] = 'field_loadpoint_value';
-$handler->display->display_options['filters']['field_date_time_value']['operator'] = 'between';
+$handler->display->display_options['filters']['field_date_time_value']['operator'] = '>=';
 $handler->display->display_options['filters']['field_date_time_value']['group'] = 1;
 $handler->display->display_options['filters']['field_date_time_value']['exposed'] = true;
 $handler->display->display_options['filters']['field_date_time_value']['expose']['operator_id'] = 'field_date_time_value_op';
-$handler->display->display_options['filters']['field_date_time_value']['expose']['label'] = 'Delivery date';
+$handler->display->display_options['filters']['field_date_time_value']['expose']['label'] = 'From delivery date';
 $handler->display->display_options['filters']['field_date_time_value']['expose']['operator'] = 'field_date_time_value_op';
-$handler->display->display_options['filters']['field_date_time_value']['expose']['identifier'] = 'field_date_time_value';
+$handler->display->display_options['filters']['field_date_time_value']['expose']['identifier'] = 'field_date_time_from';
 $handler->display->display_options['filters']['field_date_time_value']['expose']['remember_roles'] = [
 	2 => '2',
 	1 => 0,
@@ -528,6 +529,26 @@ $handler->display->display_options['filters']['field_date_time_value']['expose']
 ];
 $handler->display->display_options['filters']['field_date_time_value']['form_type'] = 'date_popup';
 $handler->display->display_options['filters']['field_date_time_value']['year_range'] = '-3:+0';
+/* Filter criterion: Field collection item: Scheduled (field_date_time) */
+$handler->display->display_options['filters']['field_date_time_value_1']['id'] = 'field_date_time_value_1';
+$handler->display->display_options['filters']['field_date_time_value_1']['table'] = 'field_data_field_date_time';
+$handler->display->display_options['filters']['field_date_time_value_1']['field'] = 'field_date_time_value';
+$handler->display->display_options['filters']['field_date_time_value_1']['relationship'] = 'field_loadpoint_value';
+$handler->display->display_options['filters']['field_date_time_value_1']['operator'] = '<=';
+$handler->display->display_options['filters']['field_date_time_value_1']['group'] = 1;
+$handler->display->display_options['filters']['field_date_time_value_1']['exposed'] = true;
+$handler->display->display_options['filters']['field_date_time_value_1']['expose']['operator_id'] = 'field_date_time_value_1_op';
+$handler->display->display_options['filters']['field_date_time_value_1']['expose']['label'] = 'To date';
+$handler->display->display_options['filters']['field_date_time_value_1']['expose']['operator'] = 'field_date_time_value_1_op';
+$handler->display->display_options['filters']['field_date_time_value_1']['expose']['identifier'] = 'field_date_time_to';
+$handler->display->display_options['filters']['field_date_time_value_1']['expose']['remember_roles'] = [
+	2 => '2',
+	1 => 0,
+	3 => 0,
+	12 => 0,
+];
+$handler->display->display_options['filters']['field_date_time_value_1']['form_type'] = 'date_popup';
+$handler->display->display_options['filters']['field_date_time_value_1']['year_range'] = '-3:+0';
 /* Filter criterion: Content: Published */
 $handler->display->display_options['filters']['status']['id'] = 'status';
 $handler->display->display_options['filters']['status']['table'] = 'node';

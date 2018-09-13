@@ -15,7 +15,7 @@ function load_accounting_reports_requirements($phase){
 
 	// Report Drupal version.
 	if($phase == 'runtime'){
-		$path_mpdf = views_pdf_get_library('mpdf');
+		$path_mpdf = load_accounting_reports_get_library('mpdf');
 
 		$requirements['load_accounting_reports_mpdf'] = [
 			'title' => $t('Load Accounting Reports - mPDF'),

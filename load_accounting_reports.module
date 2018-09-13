@@ -83,12 +83,12 @@ function load_accounting_reports_loads_totals_pdf(){
 
 	$foot = '<p align="center" class="finger-print">4Global - Loads Report - ' . date("M/d/Y");
 
-	if(isset($_GET['field_date_time_value']['min']['date']) && ! empty($_GET['field_date_time_value']['min']['date'])){
-		$foot .= ' | From: <b>' . $_GET['field_date_time_value']['min']['date'] . '</b>';
+	if(isset($_GET['field_date_time_from']['value']['date']) && ! empty($_GET['field_date_time_from']['value']['date'])){
+		$foot .= ' | From: <b>' . $_GET['field_date_time_from']['value']['date'] . '</b>';
 	}
 
-	if(isset($_GET['field_date_time_value']['max']['date']) && ! empty($_GET['field_date_time_value']['min']['date'])){
-		$foot .= ' | To: <b>' . $_GET['field_date_time_value']['min']['date'] . '</b>';
+	if(isset($_GET['field_date_time_to']['value']['date']) && ! empty($_GET['field_date_time_to']['value']['date'])){
+		$foot .= ' | To: <b>' . $_GET['field_date_time_to']['value']['date'] . '</b>';
 	}
 
 	if(isset($_GET['field_dispatcher_target_id_entityreference_filter']) && $_GET['field_dispatcher_target_id_entityreference_filter'] != 'All'){
@@ -127,7 +127,21 @@ function load_accounting_reports_loads_totals_pdf(){
 
 	include "sites/all/libraries/mpdf/mpdf.php";
 
+
 	$pdf = new mPDF('', 'A4', 0, '', 15, 15, 16, 16, 9, 9, 'L');
 	$pdf->writeHTML($output);
 	$pdf->output("4Global-Loads-" . date("Y-m-d-h-i-s") . ".pdf", "D");
+}
+
+/**
+ * Implements hook_permission().
+ */
+function load_accounting_reports_permission(){
+	return [
+		'access loads totals report' => [
+			'title' => t('Access to Loads Totals report'),
+			'description' => t('Access to view Loads Totals report and PDF download'),
+			'restrict access' => true,
+		],
+	];
 }
