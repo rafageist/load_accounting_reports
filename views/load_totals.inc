@@ -350,12 +350,12 @@ $handler->display->display_options['fields']['field_address']['settings'] = [
 	],
 ];
 $handler->display->display_options['fields']['field_address']['group_column'] = 'entity_id';
-/* Field: User: Name */
-$handler->display->display_options['fields']['name']['id'] = 'name';
-$handler->display->display_options['fields']['name']['table'] = 'users';
-$handler->display->display_options['fields']['name']['field'] = 'name';
-$handler->display->display_options['fields']['name']['relationship'] = 'uid';
-$handler->display->display_options['fields']['name']['label'] = 'Author';
+/* Field: User: Full name */
+$handler->display->display_options['fields']['field_full_name_1']['id'] = 'field_full_name_1';
+$handler->display->display_options['fields']['field_full_name_1']['table'] = 'field_data_field_full_name';
+$handler->display->display_options['fields']['field_full_name_1']['field'] = 'field_full_name';
+$handler->display->display_options['fields']['field_full_name_1']['relationship'] = 'uid';
+$handler->display->display_options['fields']['field_full_name_1']['label'] = 'Author';
 /* Field: User: Full name */
 $handler->display->display_options['fields']['field_full_name']['id'] = 'field_full_name';
 $handler->display->display_options['fields']['field_full_name']['table'] = 'field_data_field_full_name';
@@ -593,9 +593,10 @@ $handler->display->display_options['filters']['field_full_name_value_1']['expose
 	3 => 0,
 	12 => 0,
 ];
+$handler->display->display_options['filters']['field_full_name_value_1']['expose']['autocomplete_filter'] = 1;
 $handler->display->display_options['filters']['field_full_name_value_1']['expose']['autocomplete_items'] = '10';
 $handler->display->display_options['filters']['field_full_name_value_1']['expose']['autocomplete_min_chars'] = '0';
-$handler->display->display_options['filters']['field_full_name_value_1']['expose']['autocomplete_field'] = 'field_full_name';
+$handler->display->display_options['filters']['field_full_name_value_1']['expose']['autocomplete_field'] = 'field_full_name_1';
 $handler->display->display_options['filters']['field_full_name_value_1']['expose']['autocomplete_raw_suggestion'] = 1;
 $handler->display->display_options['filters']['field_full_name_value_1']['expose']['autocomplete_raw_dropdown'] = 1;
 $handler->display->display_options['filters']['field_full_name_value_1']['expose']['autocomplete_dependent'] = 0;
