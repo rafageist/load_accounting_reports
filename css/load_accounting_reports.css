@@ -13,14 +13,35 @@
     color: white;
 }
 
-.views-exposed-form label {
-    float: left;
+.view-load-totals div.label{
+    display: none;
 }
 
-.views-exposed-form div.views-submit-button {
-    float: right;
+tr.summary {
+    padding: 5px;
+    background: rgb(233, 49, 75);
+    color: white;
+    text-align: right;
 }
 
-.views-exposed-form div.views-reset-button {
-    float: right;
+.views-exposed-widget{
+    max-width: 12%;
+    font-size: 10px;
+}
+
+.views-table{
+    width: 100%;
+}
+
+div.help-block{
+    display: none;
+}
+
+div.form-type-date-popup{
+    width: 90%;
+}
+
+.container-inline-date .form-item .form-item {
+    float: none;
+    width: 75%
 }

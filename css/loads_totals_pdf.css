@@ -1,5 +1,5 @@
 body {
-    font-size: 12px;
+    font-size: 10px;
 }
 
 td.views-align-right {
@@ -29,6 +29,8 @@ h2 {
 }
 
 .summary td{
-    background: #eeeeee;
+    padding: 5px;
+    background: rgb(233, 49, 75);
+    color: white;
     text-align: right;
 }
