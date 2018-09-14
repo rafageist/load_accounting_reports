@@ -6,5 +6,4 @@ project = 4 Global
 package = 4 Global
 dependencies[] = load_accounting
 dependencies[] = views_summarize
-dependencies[] = better_exposed_filters
 
