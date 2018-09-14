@@ -1,5 +1,4 @@
 <?php
-
 $view = new view();
 $view->name = 'load_totals';
 $view->description = '';
@@ -52,7 +51,7 @@ $handler->display->display_options['style_options']['columns'] = [
 	'title_3' => 'title_3',
 	'title_4' => 'title_4',
 ];
-$handler->display->display_options['style_options']['default'] = 'title';
+$handler->display->display_options['style_options']['default'] = '-1';
 $handler->display->display_options['style_options']['info'] = [
 	'nid' => [
 		'sortable' => 0,
@@ -87,7 +86,7 @@ $handler->display->display_options['style_options']['info'] = [
 		'summarize' => 'none',
 	],
 	'title_1' => [
-		'sortable' => 0,
+		'sortable' => 1,
 		'default_sort_order' => 'asc',
 		'align' => '',
 		'separator' => '',
@@ -95,7 +94,7 @@ $handler->display->display_options['style_options']['info'] = [
 		'summarize' => 'none',
 	],
 	'title_2' => [
-		'sortable' => 0,
+		'sortable' => 1,
 		'default_sort_order' => 'asc',
 		'align' => '',
 		'separator' => '',
@@ -117,7 +116,7 @@ $handler->display->display_options['style_options']['info'] = [
 		'summarize' => 'none',
 	],
 	'name' => [
-		'sortable' => 0,
+		'sortable' => 1,
 		'default_sort_order' => 'asc',
 		'align' => '',
 		'separator' => '',
@@ -125,7 +124,7 @@ $handler->display->display_options['style_options']['info'] = [
 		'summarize' => 'none',
 	],
 	'field_full_name' => [
-		'sortable' => 0,
+		'sortable' => 1,
 		'default_sort_order' => 'asc',
 		'align' => '',
 		'separator' => '',
@@ -181,7 +180,7 @@ $handler->display->display_options['style_options']['info'] = [
 		'summarize' => 'none',
 	],
 	'field_bonus' => [
-		'sortable' => 0,
+		'sortable' => 1,
 		'default_sort_order' => 'asc',
 		'align' => '',
 		'separator' => '',
@@ -211,7 +210,7 @@ $handler->display->display_options['style_options']['info'] = [
 		'summarize' => 'none',
 	],
 	'title_3' => [
-		'sortable' => 0,
+		'sortable' => 1,
 		'default_sort_order' => 'asc',
 		'align' => '',
 		'separator' => '',
@@ -219,7 +218,7 @@ $handler->display->display_options['style_options']['info'] = [
 		'summarize' => 'none',
 	],
 	'title_4' => [
-		'sortable' => 0,
+		'sortable' => 1,
 		'default_sort_order' => 'asc',
 		'align' => '',
 		'separator' => '',
@@ -413,7 +412,7 @@ $handler->display->display_options['fields']['field_gross_payment']['table'] = '
 $handler->display->display_options['fields']['field_gross_payment']['field'] = 'field_gross_payment';
 $handler->display->display_options['fields']['field_gross_payment']['label'] = 'Gross';
 $handler->display->display_options['fields']['field_gross_payment']['settings'] = [
-	'thousand_separator' => '',
+	'thousand_separator' => ',',
 	'decimal_separator' => '.',
 	'scale' => '2',
 	'prefix_suffix' => 1,
@@ -424,7 +423,7 @@ $handler->display->display_options['fields']['field_sold_payment']['table'] = 'f
 $handler->display->display_options['fields']['field_sold_payment']['field'] = 'field_sold_payment';
 $handler->display->display_options['fields']['field_sold_payment']['label'] = 'Sold';
 $handler->display->display_options['fields']['field_sold_payment']['settings'] = [
-	'thousand_separator' => '',
+	'thousand_separator' => ',',
 	'decimal_separator' => '.',
 	'scale' => '2',
 	'prefix_suffix' => 1,
@@ -450,7 +449,7 @@ $handler->display->display_options['fields']['field_rate_x_miles']['id'] = 'fiel
 $handler->display->display_options['fields']['field_rate_x_miles']['table'] = 'field_data_field_rate_x_miles';
 $handler->display->display_options['fields']['field_rate_x_miles']['field'] = 'field_rate_x_miles';
 $handler->display->display_options['fields']['field_rate_x_miles']['settings'] = [
-	'thousand_separator' => '',
+	'thousand_separator' => ',',
 	'decimal_separator' => '.',
 	'scale' => '2',
 	'prefix_suffix' => 1,
@@ -545,7 +544,7 @@ $handler->display->display_options['filters']['field_date_time_value']['operator
 $handler->display->display_options['filters']['field_date_time_value']['group'] = 1;
 $handler->display->display_options['filters']['field_date_time_value']['exposed'] = true;
 $handler->display->display_options['filters']['field_date_time_value']['expose']['operator_id'] = 'field_date_time_value_op';
-$handler->display->display_options['filters']['field_date_time_value']['expose']['label'] = 'Delivery: From';
+$handler->display->display_options['filters']['field_date_time_value']['expose']['label'] = 'From date';
 $handler->display->display_options['filters']['field_date_time_value']['expose']['operator'] = 'field_date_time_value_op';
 $handler->display->display_options['filters']['field_date_time_value']['expose']['identifier'] = 'delivery_date_from';
 $handler->display->display_options['filters']['field_date_time_value']['expose']['remember_roles'] = [
@@ -565,7 +564,7 @@ $handler->display->display_options['filters']['field_date_time_value_1']['operat
 $handler->display->display_options['filters']['field_date_time_value_1']['group'] = 1;
 $handler->display->display_options['filters']['field_date_time_value_1']['exposed'] = true;
 $handler->display->display_options['filters']['field_date_time_value_1']['expose']['operator_id'] = 'field_date_time_value_1_op';
-$handler->display->display_options['filters']['field_date_time_value_1']['expose']['label'] = 'To';
+$handler->display->display_options['filters']['field_date_time_value_1']['expose']['label'] = 'To date';
 $handler->display->display_options['filters']['field_date_time_value_1']['expose']['operator'] = 'field_date_time_value_1_op';
 $handler->display->display_options['filters']['field_date_time_value_1']['expose']['identifier'] = 'delivery_date_to';
 $handler->display->display_options['filters']['field_date_time_value_1']['expose']['remember_roles'] = [
@@ -576,81 +575,30 @@ $handler->display->display_options['filters']['field_date_time_value_1']['expose
 ];
 $handler->display->display_options['filters']['field_date_time_value_1']['form_type'] = 'date_popup';
 $handler->display->display_options['filters']['field_date_time_value_1']['year_range'] = '-3:+0';
-/* Filter criterion: Content: Title */
-$handler->display->display_options['filters']['title']['id'] = 'title';
-$handler->display->display_options['filters']['title']['table'] = 'node';
-$handler->display->display_options['filters']['title']['field'] = 'title';
-$handler->display->display_options['filters']['title']['relationship'] = 'field_customer_target_id';
-$handler->display->display_options['filters']['title']['operator'] = 'allwords';
-$handler->display->display_options['filters']['title']['group'] = 1;
-$handler->display->display_options['filters']['title']['exposed'] = true;
-$handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
-$handler->display->display_options['filters']['title']['expose']['label'] = 'Customer';
-$handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
-$handler->display->display_options['filters']['title']['expose']['identifier'] = 'customer';
-$handler->display->display_options['filters']['title']['expose']['remember_roles'] = [
-	2 => '2',
-	1 => 0,
-	3 => 0,
-	12 => 0,
-];
-$handler->display->display_options['filters']['title']['expose']['autocomplete_filter'] = 1;
-$handler->display->display_options['filters']['title']['expose']['autocomplete_items'] = '10';
-$handler->display->display_options['filters']['title']['expose']['autocomplete_min_chars'] = '0';
-$handler->display->display_options['filters']['title']['expose']['autocomplete_field'] = 'title_1';
-$handler->display->display_options['filters']['title']['expose']['autocomplete_raw_suggestion'] = 1;
-$handler->display->display_options['filters']['title']['expose']['autocomplete_raw_dropdown'] = 1;
-$handler->display->display_options['filters']['title']['expose']['autocomplete_dependent'] = 0;
-/* Filter criterion: Content: Title */
-$handler->display->display_options['filters']['title_1']['id'] = 'title_1';
-$handler->display->display_options['filters']['title_1']['table'] = 'node';
-$handler->display->display_options['filters']['title_1']['field'] = 'title';
-$handler->display->display_options['filters']['title_1']['relationship'] = 'field_driver_target_id';
-$handler->display->display_options['filters']['title_1']['operator'] = 'allwords';
-$handler->display->display_options['filters']['title_1']['group'] = 1;
-$handler->display->display_options['filters']['title_1']['exposed'] = true;
-$handler->display->display_options['filters']['title_1']['expose']['operator_id'] = 'title_1_op';
-$handler->display->display_options['filters']['title_1']['expose']['label'] = 'Driver';
-$handler->display->display_options['filters']['title_1']['expose']['operator'] = 'title_1_op';
-$handler->display->display_options['filters']['title_1']['expose']['identifier'] = 'driver';
-$handler->display->display_options['filters']['title_1']['expose']['remember_roles'] = [
-	2 => '2',
-	1 => 0,
-	3 => 0,
-	12 => 0,
-];
-$handler->display->display_options['filters']['title_1']['expose']['autocomplete_filter'] = 1;
-$handler->display->display_options['filters']['title_1']['expose']['autocomplete_items'] = '10';
-$handler->display->display_options['filters']['title_1']['expose']['autocomplete_min_chars'] = '0';
-$handler->display->display_options['filters']['title_1']['expose']['autocomplete_field'] = 'title_2';
-$handler->display->display_options['filters']['title_1']['expose']['autocomplete_raw_suggestion'] = 1;
-$handler->display->display_options['filters']['title_1']['expose']['autocomplete_raw_dropdown'] = 1;
-$handler->display->display_options['filters']['title_1']['expose']['autocomplete_dependent'] = 0;
 /* Filter criterion: User: Full name (field_full_name) */
-$handler->display->display_options['filters']['field_full_name_value']['id'] = 'field_full_name_value';
-$handler->display->display_options['filters']['field_full_name_value']['table'] = 'field_data_field_full_name';
-$handler->display->display_options['filters']['field_full_name_value']['field'] = 'field_full_name_value';
-$handler->display->display_options['filters']['field_full_name_value']['relationship'] = 'field_dispatcher_target_id';
-$handler->display->display_options['filters']['field_full_name_value']['operator'] = 'allwords';
-$handler->display->display_options['filters']['field_full_name_value']['group'] = 1;
-$handler->display->display_options['filters']['field_full_name_value']['exposed'] = true;
-$handler->display->display_options['filters']['field_full_name_value']['expose']['operator_id'] = 'field_full_name_value_op';
-$handler->display->display_options['filters']['field_full_name_value']['expose']['label'] = 'Dispatcher';
-$handler->display->display_options['filters']['field_full_name_value']['expose']['operator'] = 'field_full_name_value_op';
-$handler->display->display_options['filters']['field_full_name_value']['expose']['identifier'] = 'dispatcher';
-$handler->display->display_options['filters']['field_full_name_value']['expose']['remember_roles'] = [
+$handler->display->display_options['filters']['field_full_name_value_1']['id'] = 'field_full_name_value_1';
+$handler->display->display_options['filters']['field_full_name_value_1']['table'] = 'field_data_field_full_name';
+$handler->display->display_options['filters']['field_full_name_value_1']['field'] = 'field_full_name_value';
+$handler->display->display_options['filters']['field_full_name_value_1']['relationship'] = 'uid';
+$handler->display->display_options['filters']['field_full_name_value_1']['operator'] = 'allwords';
+$handler->display->display_options['filters']['field_full_name_value_1']['group'] = 1;
+$handler->display->display_options['filters']['field_full_name_value_1']['exposed'] = true;
+$handler->display->display_options['filters']['field_full_name_value_1']['expose']['operator_id'] = 'field_full_name_value_1_op';
+$handler->display->display_options['filters']['field_full_name_value_1']['expose']['label'] = 'Dispatcher';
+$handler->display->display_options['filters']['field_full_name_value_1']['expose']['operator'] = 'field_full_name_value_1_op';
+$handler->display->display_options['filters']['field_full_name_value_1']['expose']['identifier'] = 'author';
+$handler->display->display_options['filters']['field_full_name_value_1']['expose']['remember_roles'] = [
 	2 => '2',
 	1 => 0,
 	3 => 0,
 	12 => 0,
 ];
-$handler->display->display_options['filters']['field_full_name_value']['expose']['autocomplete_filter'] = 1;
-$handler->display->display_options['filters']['field_full_name_value']['expose']['autocomplete_items'] = '10';
-$handler->display->display_options['filters']['field_full_name_value']['expose']['autocomplete_min_chars'] = '0';
-$handler->display->display_options['filters']['field_full_name_value']['expose']['autocomplete_field'] = 'field_full_name';
-$handler->display->display_options['filters']['field_full_name_value']['expose']['autocomplete_raw_suggestion'] = 1;
-$handler->display->display_options['filters']['field_full_name_value']['expose']['autocomplete_raw_dropdown'] = 1;
-$handler->display->display_options['filters']['field_full_name_value']['expose']['autocomplete_dependent'] = 0;
+$handler->display->display_options['filters']['field_full_name_value_1']['expose']['autocomplete_items'] = '10';
+$handler->display->display_options['filters']['field_full_name_value_1']['expose']['autocomplete_min_chars'] = '0';
+$handler->display->display_options['filters']['field_full_name_value_1']['expose']['autocomplete_field'] = 'field_full_name';
+$handler->display->display_options['filters']['field_full_name_value_1']['expose']['autocomplete_raw_suggestion'] = 1;
+$handler->display->display_options['filters']['field_full_name_value_1']['expose']['autocomplete_raw_dropdown'] = 1;
+$handler->display->display_options['filters']['field_full_name_value_1']['expose']['autocomplete_dependent'] = 0;
 /* Filter criterion: Content: Title */
 $handler->display->display_options['filters']['title_2']['id'] = 'title_2';
 $handler->display->display_options['filters']['title_2']['table'] = 'node';
@@ -676,31 +624,6 @@ $handler->display->display_options['filters']['title_2']['expose']['autocomplete
 $handler->display->display_options['filters']['title_2']['expose']['autocomplete_raw_suggestion'] = 1;
 $handler->display->display_options['filters']['title_2']['expose']['autocomplete_raw_dropdown'] = 1;
 $handler->display->display_options['filters']['title_2']['expose']['autocomplete_dependent'] = 0;
-/* Filter criterion: Content: Title */
-$handler->display->display_options['filters']['title_3']['id'] = 'title_3';
-$handler->display->display_options['filters']['title_3']['table'] = 'node';
-$handler->display->display_options['filters']['title_3']['field'] = 'title';
-$handler->display->display_options['filters']['title_3']['relationship'] = 'field_truck_target_id';
-$handler->display->display_options['filters']['title_3']['operator'] = 'allwords';
-$handler->display->display_options['filters']['title_3']['group'] = 1;
-$handler->display->display_options['filters']['title_3']['exposed'] = true;
-$handler->display->display_options['filters']['title_3']['expose']['operator_id'] = 'title_3_op';
-$handler->display->display_options['filters']['title_3']['expose']['label'] = 'Truck';
-$handler->display->display_options['filters']['title_3']['expose']['operator'] = 'title_3_op';
-$handler->display->display_options['filters']['title_3']['expose']['identifier'] = 'truck';
-$handler->display->display_options['filters']['title_3']['expose']['remember_roles'] = [
-	2 => '2',
-	1 => 0,
-	3 => 0,
-	12 => 0,
-];
-$handler->display->display_options['filters']['title_3']['expose']['autocomplete_filter'] = 1;
-$handler->display->display_options['filters']['title_3']['expose']['autocomplete_items'] = '10';
-$handler->display->display_options['filters']['title_3']['expose']['autocomplete_min_chars'] = '0';
-$handler->display->display_options['filters']['title_3']['expose']['autocomplete_field'] = 'title_4';
-$handler->display->display_options['filters']['title_3']['expose']['autocomplete_raw_suggestion'] = 1;
-$handler->display->display_options['filters']['title_3']['expose']['autocomplete_raw_dropdown'] = 1;
-$handler->display->display_options['filters']['title_3']['expose']['autocomplete_dependent'] = 0;
 /* Filter criterion: Content: Status (field_csctatus) */
 $handler->display->display_options['filters']['field_csctatus_value']['id'] = 'field_csctatus_value';
 $handler->display->display_options['filters']['field_csctatus_value']['table'] = 'field_data_field_csctatus';
@@ -710,6 +633,7 @@ $handler->display->display_options['filters']['field_csctatus_value']['value'] =
 	'Transit' => 'Transit',
 	'Completed' => 'Completed',
 ];
+$handler->display->display_options['filters']['field_csctatus_value']['group'] = 1;
 
 /* Display: Page */
 $handler = $view->new_display('page', 'Page', 'page');

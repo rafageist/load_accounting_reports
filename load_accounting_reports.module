@@ -40,6 +40,44 @@ function load_accounting_reports_views_pre_render(&$view){
 	}
 }
 
+
+/**
+ * Implements hook_views_post_render().
+ */
+function load_accounting_reports_views_post_render(&$view, &$output, &$cache){
+
+	// post process summary
+	$tag = '<tr class="summary">';
+	$p = strpos($output, $tag);
+	if($p !== false){
+		// add Summary label
+		$p1 = strpos($output, '<td></td>', $p);
+		if($p1 !== false){
+			$output = substr($output, 0, $p1) . '<td align="left">Summary</td>' . substr($output, $p1 + 9);
+		}
+
+		// number format each total
+		while(true){
+			$p1 = strpos($output, '<td>', $p);
+			if($p1 === false) break;
+
+			$p2 = strpos($output, '</td>', $p1);
+			if($p2 === false) break;
+
+			$value = substr($output, $p1 + 4, $p2 - $p1 - 4);
+			$p3 = strpos($value, '</div>');
+			if($p3 !== false) $value = substr($value, $p3 + 6);
+
+			if(is_numeric($value)){
+				$value = number_format(floatval($value), 2);
+				$output = substr($output, 0, $p1 + 4) . $value . substr($output, $p2);
+			}
+
+			$p = $p1 + 1;
+		}
+	}
+}
+
 /**
  * Implements hook_views_default_views().
  */
@@ -82,45 +120,45 @@ function load_accounting_reports_loads_totals_pdf(){
 	$header = '<img src="sites/all/themes/load_subtheme/login.png" width="100"><br/><h2 align="right">Loads</h2>';
 
 	$foot = '<p align="center" class="finger-print">4Global - Loads Report - ' . date("M/d/Y");
-/*
-	if(isset($_GET['field_date_time_from']['value']['date']) && ! empty($_GET['field_date_time_from']['value']['date'])){
-		$foot .= ' | From: <b>' . $_GET['field_date_time_from']['value']['date'] . '</b>';
-	}
+	/*
+		if(isset($_GET['field_date_time_from']['value']['date']) && ! empty($_GET['field_date_time_from']['value']['date'])){
+			$foot .= ' | From: <b>' . $_GET['field_date_time_from']['value']['date'] . '</b>';
+		}
 
-	if(isset($_GET['field_date_time_to']['value']['date']) && ! empty($_GET['field_date_time_to']['value']['date'])){
-		$foot .= ' | To: <b>' . $_GET['field_date_time_to']['value']['date'] . '</b>';
-	}
+		if(isset($_GET['field_date_time_to']['value']['date']) && ! empty($_GET['field_date_time_to']['value']['date'])){
+			$foot .= ' | To: <b>' . $_GET['field_date_time_to']['value']['date'] . '</b>';
+		}
 
-	if(isset($_GET['field_dispatcher_target_id_entityreference_filter']) && $_GET['field_dispatcher_target_id_entityreference_filter'] != 'All'){
-		$dispatcher = user_load($_GET['field_dispatcher_target_id_entityreference_filter']);
-		$foot .= ' | Dispatcher: <b>' . $dispatcher->field_full_name['und'][0]['value'] . '</b>';
-	}
+		if(isset($_GET['field_dispatcher_target_id_entityreference_filter']) && $_GET['field_dispatcher_target_id_entityreference_filter'] != 'All'){
+			$dispatcher = user_load($_GET['field_dispatcher_target_id_entityreference_filter']);
+			$foot .= ' | Dispatcher: <b>' . $dispatcher->field_full_name['und'][0]['value'] . '</b>';
+		}
 
-	if(isset($_GET['uid_entityreference_filter']) && $_GET['uid_entityreference_filter'] != 'All'){
-		$author = user_load($_GET['uid_entityreference_filter']);
-		$foot .= ' | Author: <b>' . $author->field_full_name['und'][0]['value'] . '</b>';
-	}
+		if(isset($_GET['uid_entityreference_filter']) && $_GET['uid_entityreference_filter'] != 'All'){
+			$author = user_load($_GET['uid_entityreference_filter']);
+			$foot .= ' | Author: <b>' . $author->field_full_name['und'][0]['value'] . '</b>';
+		}
 
-	if(isset($_GET['field_customer_target_id_entityreference_filter']) && $_GET['field_customer_target_id_entityreference_filter'] != 'All'){
-		$customer = node_load($_GET['field_customer_target_id_entityreference_filter']);
-		$foot .= ' | Customer: <b>' . $customer->title . '</b>';
-	}
+		if(isset($_GET['field_customer_target_id_entityreference_filter']) && $_GET['field_customer_target_id_entityreference_filter'] != 'All'){
+			$customer = node_load($_GET['field_customer_target_id_entityreference_filter']);
+			$foot .= ' | Customer: <b>' . $customer->title . '</b>';
+		}
 
-	if(isset($_GET['field_single_carrier_target_id_entityreference_filter']) && $_GET['field_single_carrier_target_id_entityreference_filter'] != 'All'){
-		$carrier = node_load($_GET['field_single_carrier_target_id_entityreference_filter']);
-		$foot .= ' | Carrier: <b>' . $carrier->title . '</b>';
-	}
+		if(isset($_GET['field_single_carrier_target_id_entityreference_filter']) && $_GET['field_single_carrier_target_id_entityreference_filter'] != 'All'){
+			$carrier = node_load($_GET['field_single_carrier_target_id_entityreference_filter']);
+			$foot .= ' | Carrier: <b>' . $carrier->title . '</b>';
+		}
 
-	if(isset($_GET['field_driver_target_id_entityreference_filter']) && $_GET['field_single_carrier_target_id_entityreference_filter'] != 'All'){
-		$driver = node_load($_GET['field_driver_target_id_entityreference_filter']);
-		$foot .= ' | Driver: <b>' . $driver->title . '</b>';
-	}
+		if(isset($_GET['field_driver_target_id_entityreference_filter']) && $_GET['field_single_carrier_target_id_entityreference_filter'] != 'All'){
+			$driver = node_load($_GET['field_driver_target_id_entityreference_filter']);
+			$foot .= ' | Driver: <b>' . $driver->title . '</b>';
+		}
 
-	if(isset($_GET['field_truck_target_id_entityreference_filter']) && $_GET['field_truck_target_id_entityreference_filter'] != 'All'){
-		$truck = node_load($_GET['field_truck_target_id_entityreference_filter']);
-		$foot .= ' | Truck: <b>' . $truck->title . '</b>';
-	}
-*/
+		if(isset($_GET['field_truck_target_id_entityreference_filter']) && $_GET['field_truck_target_id_entityreference_filter'] != 'All'){
+			$truck = node_load($_GET['field_truck_target_id_entityreference_filter']);
+			$foot .= ' | Truck: <b>' . $truck->title . '</b>';
+		}
+	*/
 	$foot .= '</p></body></html>';
 
 	$output = $head . $header . $output . $foot;
