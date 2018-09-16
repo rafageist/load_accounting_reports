@@ -36,7 +36,7 @@ $handler->display->display_options['style_options']['columns'] = [
 	'title_2' => 'title_2',
 	'field_loadpoint' => 'field_loadpoint',
 	'field_address' => 'field_address',
-	'name' => 'name',
+	'field_full_name_1' => 'field_full_name_1',
 	'field_full_name' => 'field_full_name',
 	'field_date_time' => 'field_date_time',
 	'field_empty_miles' => 'field_empty_miles',
@@ -50,6 +50,13 @@ $handler->display->display_options['style_options']['columns'] = [
 	'field_rate_confirmation' => 'field_rate_confirmation',
 	'title_3' => 'title_3',
 	'title_4' => 'title_4',
+	'field_rate' => 'field_rate',
+	'field_owned' => 'field_owned',
+	'php' => 'php',
+	'php_2' => 'php_2',
+	'php_1' => 'php_1',
+	'php_3' => 'php_3',
+	'php_4' => 'php_4',
 ];
 $handler->display->display_options['style_options']['default'] = '-1';
 $handler->display->display_options['style_options']['info'] = [
@@ -115,8 +122,8 @@ $handler->display->display_options['style_options']['info'] = [
 		'empty_column' => 0,
 		'summarize' => 'none',
 	],
-	'name' => [
-		'sortable' => 1,
+	'field_full_name_1' => [
+		'sortable' => 0,
 		'default_sort_order' => 'asc',
 		'align' => '',
 		'separator' => '',
@@ -225,16 +232,74 @@ $handler->display->display_options['style_options']['info'] = [
 		'empty_column' => 0,
 		'summarize' => 'none',
 	],
+	'field_rate' => [
+		'sortable' => 0,
+		'default_sort_order' => 'asc',
+		'align' => '',
+		'separator' => '',
+		'empty_column' => 0,
+		'summarize' => 'none',
+	],
+	'field_owned' => [
+		'sortable' => 0,
+		'default_sort_order' => 'asc',
+		'align' => '',
+		'separator' => '',
+		'empty_column' => 0,
+		'summarize' => 'none',
+	],
+	'php' => [
+		'sortable' => 0,
+		'default_sort_order' => 'asc',
+		'align' => 'views-align-right',
+		'separator' => '',
+		'empty_column' => 0,
+		'summarize' => 'total',
+	],
+	'php_2' => [
+		'sortable' => 0,
+		'default_sort_order' => 'asc',
+		'align' => 'views-align-right',
+		'separator' => '',
+		'empty_column' => 0,
+		'summarize' => 'total',
+	],
+	'php_1' => [
+		'sortable' => 0,
+		'default_sort_order' => 'asc',
+		'align' => 'views-align-right',
+		'separator' => '',
+		'empty_column' => 0,
+		'summarize' => 'total',
+	],
+	'php_3' => [
+		'sortable' => 0,
+		'default_sort_order' => 'asc',
+		'align' => 'views-align-right',
+		'separator' => '',
+		'empty_column' => 0,
+		'summarize' => 'total',
+	],
+	'php_4' => [
+		'sortable' => 0,
+		'default_sort_order' => 'asc',
+		'align' => 'views-align-right',
+		'separator' => '',
+		'empty_column' => 0,
+		'summarize' => 'total',
+	],
 ];
-$handler->display->display_options['style_options']['sticky'] = true;
 $handler->display->display_options['style_options']['summary'] = 'Summary';
 /* Header: Global: PHP */
 $handler->display->display_options['header']['php']['id'] = 'php';
 $handler->display->display_options['header']['php']['table'] = 'views';
 $handler->display->display_options['header']['php']['field'] = 'php';
-$handler->display->display_options['header']['php']['php_output'] = '<p align="right">
-<a class="btn btn-danger" href="<?php echo str_replace(\'loads/totals\',\'loads/pdf\',$_SERVER[\'REQUEST_URI\']);?>">Download as PDF</a>
+$handler->display->display_options['header']['php']['php_output'] = '<form action="<?php echo str_replace(\'loads/totals\', \'loads/pdf\', $_SERVER[\'REQUEST_URI\']); ?>" method="POST">
+<p align="right">
+<button id ="download-button" class="btn btn-danger" type="submit">Download as PDF</button><br/>
+<input type="checkbox" name="exclude-columns"> Exclude unnecessary fields
 </p>
+</form>
 ';
 /* Footer: Global: PHP */
 $handler->display->display_options['footer']['php']['id'] = 'php';
@@ -444,6 +509,7 @@ $handler->display->display_options['fields']['field_accessories']['settings'] = 
 $handler->display->display_options['fields']['field_bonus']['id'] = 'field_bonus';
 $handler->display->display_options['fields']['field_bonus']['table'] = 'field_data_field_bonus';
 $handler->display->display_options['fields']['field_bonus']['field'] = 'field_bonus';
+$handler->display->display_options['fields']['field_bonus']['exclude'] = true;
 /* Field: Content: Rate x Miles */
 $handler->display->display_options['fields']['field_rate_x_miles']['id'] = 'field_rate_x_miles';
 $handler->display->display_options['fields']['field_rate_x_miles']['table'] = 'field_data_field_rate_x_miles';
@@ -503,6 +569,136 @@ $handler->display->display_options['fields']['title_4']['field'] = 'title';
 $handler->display->display_options['fields']['title_4']['relationship'] = 'field_truck_target_id';
 $handler->display->display_options['fields']['title_4']['label'] = 'Truck';
 $handler->display->display_options['fields']['title_4']['exclude'] = true;
+/* Field: Content: Rate */
+$handler->display->display_options['fields']['field_rate']['id'] = 'field_rate';
+$handler->display->display_options['fields']['field_rate']['table'] = 'field_data_field_rate';
+$handler->display->display_options['fields']['field_rate']['field'] = 'field_rate';
+$handler->display->display_options['fields']['field_rate']['relationship'] = 'field_single_carrier_target_id';
+$handler->display->display_options['fields']['field_rate']['label'] = 'Carrier Rate';
+$handler->display->display_options['fields']['field_rate']['exclude'] = true;
+$handler->display->display_options['fields']['field_rate']['settings'] = [
+	'thousand_separator' => ',',
+	'decimal_separator' => '.',
+	'scale' => '2',
+	'prefix_suffix' => 1,
+];
+/* Field: Content: Owned by 4Global */
+$handler->display->display_options['fields']['field_owned']['id'] = 'field_owned';
+$handler->display->display_options['fields']['field_owned']['table'] = 'field_data_field_owned';
+$handler->display->display_options['fields']['field_owned']['field'] = 'field_owned';
+$handler->display->display_options['fields']['field_owned']['relationship'] = 'field_single_carrier_target_id';
+$handler->display->display_options['fields']['field_owned']['exclude'] = true;
+/* Field: dispatch-service-earned */
+$handler->display->display_options['fields']['php']['id'] = 'php';
+$handler->display->display_options['fields']['php']['table'] = 'views';
+$handler->display->display_options['fields']['php']['field'] = 'php';
+$handler->display->display_options['fields']['php']['ui_name'] = 'dispatch-service-earned';
+$handler->display->display_options['fields']['php']['label'] = 'Earned';
+$handler->display->display_options['fields']['php']['element_label_class'] = 'border-left-white';
+$handler->display->display_options['fields']['php']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php']['php_value'] = 'return isset($data->field_field_sold_payment) ? 
+(
+  floatval(str_replace(",","",$data->field_field_sold_payment[0][\'raw\'][\'value\'])) 
+      * (empty($data->field_field_rate[0][\'raw\'][\'value\']) ?  0.05 : floatval($data->field_field_rate[0][\'raw\'][\'value\']))
+): 0;';
+$handler->display->display_options['fields']['php']['php_output'] = '<?php 
+if (isset($data->field_field_sold_payment))
+  echo number_format(floatval(str_replace(",","",$data->field_field_sold_payment[0][\'raw\'][\'value\'])) 
+   * (empty($data->field_field_rate[0][\'raw\'][\'value\']) ?  0.05 : floatval($data->field_field_rate[0][\'raw\'][\'value\'])), 2); 
+?>';
+$handler->display->display_options['fields']['php']['use_php_click_sortable'] = '1';
+$handler->display->display_options['fields']['php']['php_click_sortable'] = '';
+/* Field: dispatch-service-dispatcher */
+$handler->display->display_options['fields']['php_2']['id'] = 'php_2';
+$handler->display->display_options['fields']['php_2']['table'] = 'views';
+$handler->display->display_options['fields']['php_2']['field'] = 'php';
+$handler->display->display_options['fields']['php_2']['ui_name'] = 'dispatch-service-dispatcher';
+$handler->display->display_options['fields']['php_2']['label'] = 'Dispatcher';
+$handler->display->display_options['fields']['php_2']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php_2']['php_value'] = 'return isset($data->field_field_sold_payment) ?
+(
+0.25 *
+ ( floatval(str_replace(",","",$data->field_field_sold_payment[0][\'raw\'][\'value\'])) 
+  * (empty($data->field_field_rate[0][\'raw\'][\'value\']) ?  0.05 : 
+     floatval($data->field_field_rate[0][\'raw\'][\'value\'])))
+) : 0;';
+$handler->display->display_options['fields']['php_2']['php_output'] = '<?php
+if (isset($data->field_field_sold_payment))
+ echo number_format(0.25 *
+ ( floatval(str_replace(",","",$data->field_field_sold_payment[0][\'raw\'][\'value\'])) 
+  * (empty($data->field_field_rate[0][\'raw\'][\'value\']) ?  0.05 : floatval($data->field_field_rate[0][\'raw\'][\'value\']))), 2); ?>';
+$handler->display->display_options['fields']['php_2']['use_php_click_sortable'] = '1';
+$handler->display->display_options['fields']['php_2']['php_click_sortable'] = '';
+/* Field: bonus-earned */
+$handler->display->display_options['fields']['php_1']['id'] = 'php_1';
+$handler->display->display_options['fields']['php_1']['table'] = 'views';
+$handler->display->display_options['fields']['php_1']['field'] = 'php';
+$handler->display->display_options['fields']['php_1']['ui_name'] = 'bonus-earned';
+$handler->display->display_options['fields']['php_1']['label'] = 'Earned';
+$handler->display->display_options['fields']['php_1']['element_label_class'] = 'border-left-white';
+$handler->display->display_options['fields']['php_1']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php_1']['php_value'] = 'return isset($data->field_field_gross_payment) ? (floatval($data->field_field_gross_payment[0][\'raw\'][\'value\']) - floatval($data->field_field_sold_payment[0][\'raw\'][\'value\'])) : 0;';
+$handler->display->display_options['fields']['php_1']['php_output'] = '<?php 
+if (isset($data->field_field_sold_payment))
+echo number_format($data->field_field_gross_payment[0][\'raw\'][\'value\'] - $data->field_field_sold_payment[0][\'raw\'][\'value\'], 2); 
+?>';
+$handler->display->display_options['fields']['php_1']['use_php_click_sortable'] = '1';
+$handler->display->display_options['fields']['php_1']['php_click_sortable'] = '';
+/* Field: bonus-dispatcher */
+$handler->display->display_options['fields']['php_3']['id'] = 'php_3';
+$handler->display->display_options['fields']['php_3']['table'] = 'views';
+$handler->display->display_options['fields']['php_3']['field'] = 'php';
+$handler->display->display_options['fields']['php_3']['ui_name'] = 'bonus-dispatcher';
+$handler->display->display_options['fields']['php_3']['label'] = 'Dispatcher';
+$handler->display->display_options['fields']['php_3']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php_3']['php_value'] = 'return isset($data->field_field_sold_payment) ?
+(
+ (floatval($data->field_field_gross_payment[0][\'raw\'][\'value\']) - floatval($data->field_field_sold_payment[0][\'raw\'][\'value\']))  *  ($data->field_field_owned[0][\'raw\'][\'value\'] ? 0.35 : 0.25)
+) : 0;';
+$handler->display->display_options['fields']['php_3']['php_output'] = '<?php
+if (isset($data->field_field_sold_payment))
+echo number_format(
+   (floatval($data->field_field_gross_payment[0][\'raw\'][\'value\']) - floatval($data->field_field_sold_payment[0][\'raw\'][\'value\'])) 
+    * ($data->field_field_owned[0][\'raw\'][\'value\']? 0.35 : 0.25), 
+2);
+?>';
+$handler->display->display_options['fields']['php_3']['use_php_click_sortable'] = '1';
+$handler->display->display_options['fields']['php_3']['php_click_sortable'] = '';
+/* Field: bonus-carrier */
+$handler->display->display_options['fields']['php_4']['id'] = 'php_4';
+$handler->display->display_options['fields']['php_4']['table'] = 'views';
+$handler->display->display_options['fields']['php_4']['field'] = 'php';
+$handler->display->display_options['fields']['php_4']['ui_name'] = 'bonus-carrier';
+$handler->display->display_options['fields']['php_4']['label'] = 'Carrier';
+$handler->display->display_options['fields']['php_4']['use_php_setup'] = 0;
+$handler->display->display_options['fields']['php_4']['php_value'] = 'if (isset($data->field_field_owned))
+{
+	$owned = $data->field_field_owned[0][\'raw\'][\'value\'];
+	
+	$bonus_earned = floatval($data->field_field_gross_payment[0][\'raw\'][\'value\']) 
+	                - floatval($data->field_field_sold_payment[0][\'raw\'][\'value\']);
+	
+	$bonus_dispatcher = $bonus_earned *  ($owned ? 0.35 : 0.25);
+				
+	return $owned ? 0 : 0.5 * abs($bonus_earned - $bonus_dispatcher);
+}   ';
+$handler->display->display_options['fields']['php_4']['php_output'] = '<?php
+
+if (isset($data->field_field_owned))
+{
+	$owned = $data->field_field_owned[0][\'raw\'][\'value\'];
+	
+	$bonus_earned = floatval($data->field_field_gross_payment[0][\'raw\'][\'value\']) 
+	                - floatval($data->field_field_sold_payment[0][\'raw\'][\'value\']);
+	
+	$bonus_dispatcher = $bonus_earned *  ($owned ? 0.35 : 0.25);
+				
+	echo number_format($owned ? 0 : 0.5 * abs($bonus_earned - $bonus_dispatcher), 2);
+}     
+
+?>';
+$handler->display->display_options['fields']['php_4']['use_php_click_sortable'] = '1';
+$handler->display->display_options['fields']['php_4']['php_click_sortable'] = '';
 /* Sort criterion: Content: Nid */
 $handler->display->display_options['sorts']['nid']['id'] = 'nid';
 $handler->display->display_options['sorts']['nid']['table'] = 'node';

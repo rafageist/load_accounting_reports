@@ -25,10 +25,8 @@ tr.summary {
 }
 
 .views-exposed-widget{
-    max-width: 20%;
     font-size: 10px;
 }
-
 .views-table{
     width: 100%;
 }
@@ -37,8 +35,9 @@ div.help-block{
     display: none;
 }
 
-div.form-type-date-popup{
-    /*width: 90%;*/
+#edit-delivery-date-from-value-datepicker-popup-0, #edit-delivery-date-to-value-datepicker-popup-0{
+    width: 210px;
+    font-size:12px;
 }
 
 .container-inline-date .form-item .form-item {
@@ -52,4 +51,13 @@ div.form-type-date-popup{
 
 #edit-submit-load-totals, #edit-reset{
     margin-top: 1.3em;
+}
+
+.view-load-totals th {
+    text-align: center;
+    border-bottom: 1px solid white;
+}
+
+.border-left-white{
+    border-left: 1px solid white;
 }
