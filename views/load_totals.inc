@@ -9,6 +9,16 @@ $view->core = 7;
 $view->api_version = '3.0';
 $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
 
+$view = new view();
+$view->name = 'load_totals';
+$view->description = '';
+$view->tag = 'default';
+$view->base_table = 'node';
+$view->human_name = 'load_totals';
+$view->core = 7;
+$view->api_version = '3.0';
+$view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
 /* Display: Master */
 $handler = $view->new_display('default', 'Master', 'default');
 $handler->display->display_options['title'] = 'Loads totals';
@@ -608,7 +618,7 @@ $handler->display->display_options['fields']['php_2']['ui_name'] = 'dispatch-ser
 $handler->display->display_options['fields']['php_2']['label'] = 'Dispatcher';
 $handler->display->display_options['fields']['php_2']['use_php_setup'] = 0;
 $handler->display->display_options['fields']['php_2']['php_value'] = 'return LoadTotalsRowCalc::getInstance($data)->dispatch_service_dispatcher;';
-$handler->display->display_options['fields']['php_2']['php_output'] = '<?php echo number_format(LoadTotalsRowCalc::getInstance($data)->dispatch_service_earned, 2); ?>';
+$handler->display->display_options['fields']['php_2']['php_output'] = '<?php echo number_format(LoadTotalsRowCalc::getInstance($data)->dispatch_service_dispatcher, 2); ?>';
 $handler->display->display_options['fields']['php_2']['use_php_click_sortable'] = '1';
 $handler->display->display_options['fields']['php_2']['php_click_sortable'] = '';
 /* Field: bonus-earned */
